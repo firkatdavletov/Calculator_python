@@ -1,169 +1,133 @@
 import tkinter as tk
+from tkinter import ttk
+
 
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
-        self.pack()
+        self.grid()
         self.create_widgets()
 
     def create_widgets(self):
-        self.title = tk.Label(self)
-        self.title["text"] = "ПРОТОКОЛ\nизмерений параметров технологического оборудования"
-        self.title.pack(side="top")
+        self.groupInp = ttk.Entry(self)
+        self.groupInp.grid(row='0', column='1', columnspan='1', sticky='w', padx='5', pady='5')
+        self.groupLbl = ttk.Label(self, text='Группа')
+        self.groupLbl.grid(row='0', column='0', padx='5', pady='0')
 
-        self.frame1 = tk.Frame(self)
-        self.frame1.pack()
+        self.categoryInp = ttk.Entry(self)
+        self.categoryInp.grid(row='0', column='3', padx='5', pady='5')
+        self.categoryLbl = ttk.Label(self, text='Категория')
+        self.categoryLbl.grid(row='0', column='2', padx='5', pady='0')
 
-        self.group = tk.Label(self.frame1)
-        self.group['text'] = 'Группа'
-        self.group.pack(side='left', padx=30)
+        self.companyLbl = ttk.Label(self, text='Организация (предприятие)')
+        self.companyLbl.grid(row='2', column='0', columnspan='1', sticky='w', padx='5', pady='5')
+        self.companyInp = ttk.Entry(self)
+        self.companyInp.grid(row='2', column='1', columnspan='1', sticky='w', padx='5', pady='5')
 
-        self.inputGroup = tk.Entry(self.frame1)
-        self.inputGroup.pack(side='left', padx=5, pady=5)
+        self.ntb = ttk.Notebook(self)
+        self.tab1 = ttk.Frame(self.ntb)
+        self.tab2 = ttk.Frame(self.ntb)
+        self.tab3 = ttk.Frame(self.ntb)
+        self.ntb.add(self.tab1, text='Технологический нефтепродуктопровод')
+        self.ntb.add(self.tab2, text='Отдельные трубопроводы')
+        self.ntb.add(self.tab3, text='third')
 
+        self.title1 = tk.Label(self.tab1)
+        self.title1['text'] = '1. Технологический нефтепродуктопровод'
+        self.title1.grid(row='0', column='0', columnspan='2', padx='5', pady='20')
 
-        self.inputCategory = tk.Entry(self.frame1)
-        self.inputCategory.pack(side='right', padx=5, pady=5)
+        self.generalDataLbl = tk.Label(self.tab1, text='1.1 Общие данные')
+        self.generalDataLbl.grid(row='1', column='0', columnspan='1', padx='5', pady='5', sticky='w')
 
-        self.category = tk.Label(self.frame1)
-        self.category['text'] = 'Категория'
-        self.category.pack(side='right', padx=30)
+        self.regNumbLbl = tk.Label(self.tab1, text='Регистрационный номер')
+        self.regNumbLbl.grid(row='2', column='0', columnspan='1', padx='5', pady='5', sticky='w')
+        self.regNumbInp = tk.Entry(self.tab1, width='10')
+        self.regNumbInp.grid(row='2', column='1', columnspan='1', padx='5', pady='5')
 
-        self.frame2 = tk.Frame(self)
-        self.frame2.pack()
+        self.dateLbl = tk.Label(self.tab1, text='Дата')
+        self.dateLbl.grid(row='2', column='2', columnspan='1', rowspan='2', ipadx='5', ipady='5', sticky='nw')
+        self.dateDayInp = tk.Entry(self.tab1, width='10')
+        self.dateDayInp.grid(row='2', column='3', columnspan='1', padx='5', pady='0', sticky='nw')
+        self.dateMonthInp = tk.Entry(self.tab1, width='10')
+        self.dateMonthInp.grid(row='2', column='4', columnspan='1', padx='5', pady='0', sticky='nw')
+        self.dateYearInp = tk.Entry(self.tab1,width='10')
+        self.dateYearInp.grid(row='2', column='5', columnspan='1', padx='5', pady='0', sticky='nw')
+        self.dateDayLbl = tk.Label(self.tab1, text='день')
+        self.dateDayLbl.grid(row='3', column='3', columnspan='1', padx='5', pady='0')
+        self.dateMonthLbl = tk.Label(self.tab1, text='месяц')
+        self.dateMonthLbl.grid(row='3', column='4', columnspan='1', padx='5', pady='0')
+        self.dateYearLbl = tk.Label(self.tab1, text='год')
+        self.dateYearLbl.grid(row='3', column='5', columnspan='1', padx='5', pady='0')
 
-        self.companyName = tk.Label(self.frame2)
-        self.companyName['text'] = 'Организация (предприятие)'
-        self.companyName.pack(side='left')
+        self.causeOfMeasLbl = tk.Label(self.tab1, text='Основание для проведения измерений')
+        self.causeOfMeasLbl.grid(row='5', column='0', columnspan='1', padx='5', pady='5', sticky='w')
+        self.causeOfMeasInp = tk.Entry(self.tab1, width='50')
+        self.causeOfMeasInp.grid(row='5', column='1', columnspan='8', padx='5', pady='5', sticky='w')
 
-        self.inputCompanyName = tk.Entry(self.frame2)
-        self.inputCompanyName.pack(side='right')
+        self.placeOfMeasLbl = tk.Label(self.tab1, text='Место проведения измерений')
+        self.placeOfMeasLbl.grid(row='6', column='0', columnspan='1', padx='5', pady='5', sticky='w')
+        self.placeOfMeasInp = tk.Entry(self.tab1, width='50')
+        self.placeOfMeasInp.grid(row='6', column='1', columnspan='8', padx='5', pady='5', sticky='w')
 
-        self.subtitle1 = tk.Label(self)
-        self.subtitle1['text'] = 'Б.1 Технологический нефтепродуктопровод'
-        self.subtitle1.pack()
+        self.innacOfMeasLbl = tk.Label(self.tab1, justify='left')
+        self.innacOfMeasLbl['text'] = 'Погрешность определения вместимости\nтехнологического нефтепродуктопровода, %'
+        self.innacOfMeasLbl.grid(row='7', column='0', columnspan='1', padx='5', pady='5', sticky='w')
+        self.innacOfMeasInp = tk.Entry(self.tab1, width='50')
+        self.innacOfMeasInp.grid(row='7', column='1', columnspan='8', padx='5', pady='5', sticky='w')
 
-        self.frame3 = tk.LabelFrame(self)
-        self.frame3['text'] = 'Б.1.1 - Общие данные'
-        self.frame3.pack()
+        self.devicesLbl = tk.Label(self.tab1, justify='left')
+        self.devicesLbl['text'] = 'Средства измерений'
+        self.devicesLbl.grid(row='8', column='0', columnspan='1', padx='5', pady='5', sticky='w')
+        self.devicesInp = tk.Entry(self.tab1, width='50')
+        self.devicesInp.grid(row='8', column='1', columnspan='8', padx='5', pady='5', sticky='w')
 
-        self.registerNumber = tk.Frame(self.frame3)
-        self.registerNumber.pack()
+        self.condLbl = tk.Label(self.tab1, text='1.2 Условия проведения измерений')
+        self.condLbl.grid(row='9', column='0', columnspan='1', padx='5', pady='5', sticky='w')
 
-        self.registerNumberLbl = tk.Label(self.registerNumber)
-        self.registerNumberLbl['text'] = 'Регистрационный номер:'
-        self.registerNumberLbl.pack(side='left')
+        self.tempLbl = tk.Label(self.tab1, text='Температура воздуха, °С')
+        self.tempLbl.grid(row='10', column='0', columnspan='1', padx='5', pady='5', sticky='w')
+        self.tempInp = tk.Entry(self.tab1, width='10')
+        self.tempInp.grid(row='10', column='1', columnspan='1', padx='5', pady='5', sticky='w')
 
-        self.date = tk.Frame(self.frame3)
-        self.date.pack()
+        self.speedWindLbl = tk.Label(self.tab1, text='Скорость ветра, м/с')
+        self.speedWindLbl.grid(row='10', column='2', columnspan='2', padx='5', pady='5', sticky='w')
+        self.speedWindInp = tk.Entry(self.tab1, width='10')
+        self.speedWindInp.grid(row='10', column='4', columnspan='1', padx='5', pady='5', sticky='w')
 
-        self.dateLbl = tk.Label(self.date)
-        self.dateLbl['text'] = 'Дата:'
-        self.dateLbl.pack(side='left')
+        self.gazPollLbl = tk.Label(self.tab1, text='Загазованность, м³')
+        self.gazPollLbl.grid(row='10', column='5', columnspan='2', padx='5', pady='5', sticky='w')
+        self.gazPollInp = tk.Entry(self.tab1, width='10')
+        self.gazPollInp.grid(row='10', column='7', columnspan='1', padx='5', pady='5', sticky='w')
 
-        self.day = tk.Frame(self.date)
-        self.day.pack(side='left')
+        self.title2 = tk.Label(self.tab2, text='1. Отдельные трубопроводы')
+        self.title2.grid(row='0', column='0', columnspan='1', padx='5', pady='5', sticky='w')
 
-        self.dayInp = tk.Entry(self.day)
-        self.dayInp.pack()
+        self.pipeLineNumbLbl = tk.Label(self.tab2, text='Номер отдельного трубопровода')
+        self.pipeLineNumbLbl.grid(row='1', column='0', columnspan='1', padx='5', pady='5', sticky='w')
+        self.pipeLineNumbInp = tk.Entry(self.tab2, width='10')
+        self.pipeLineNumbInp.grid(row='1', column='1', columnspan='1', padx='5', pady='5', sticky='w')
 
-        self.dayLbl = tk.Label(self.day)
-        self.dayLbl['text'] = 'день'
-        self.dayLbl.pack()
+        self.pipeLineBoundsLbl = tk.Label(self.tab2, text='Границы по номерам\nградуировочных точек', justify='left')
+        self.pipeLineBoundsLbl.grid(row='1', column='2', columnspan='2', padx='5', pady='5', sticky='e')
+        self.pipeLineBoundsInp = tk.Entry(self.tab2, width='10')
+        self.pipeLineBoundsInp.grid(row='1', column='5', columnspan='1', padx='5', pady='5', sticky='w')
 
-        self.month = tk.Frame(self.date)
-        self.month.pack(side='left')
+        self.addPipLineButt = tk.Button(self.tab2, text='Добавить трубопровод')
+        self.addPipLineButt.grid(row='2', column='0')
 
-        self.monthInp = tk.Entry(self.month)
-        self.monthInp.pack()
+        self.pipeLinesCanv = tk.Canvas(self.tab2, width='768', height='200')
+        self.pipeLinesCanv.grid(row='3', column='0', columnspan='6')
 
-        self.monthLbl = tk.Label(self.month)
-        self.monthLbl['text'] = 'месяц'
-        self.monthLbl.pack()
+        self.pipeLinesCanv.create_rectangle(10, 10, 768, 100)
+        self.pipeLinesCanv.create_text(10, 10, text='Номер отдельного\nтрубопровода')
 
-        self.year = tk.Frame(self.date)
-        self.year.pack(side='left')
+        self.ntb.grid(row='3', column='0', columnspan='4', padx='5', pady='5')
 
-        self.yearInp = tk.Entry(self.year)
-        self.yearInp.pack()
-
-        self.yearLbl = tk.Label(self.year)
-        self.yearLbl['text'] = 'год'
-        self.yearLbl.pack()
-
-        self.cause = tk.Frame(self.frame3)
-        self.cause.pack()
-
-        self.causeName = tk.Label(self.cause)
-        self.causeName['text'] = 'Основание для проведения измерений'
-        self.causeName.pack(side='left')
-
-        self.causeTxt = tk.Text(self.cause, height=4)
-        self.causeTxt.pack(side='left')
-
-        self.place = tk.Frame(self.frame3)
-        self.place.pack()
-
-        self.placeName = tk.Label(self.place)
-        self.placeName['text'] = 'Место проведения измерений'
-        self.placeName.pack(side='left')
-
-        self.placeTxt = tk.Text(self.place, height=4)
-        self.placeTxt.pack(side='left')
-
-        self.innacuracy = tk.Frame(self.frame3)
-        self.innacuracy.pack()
-
-        self.innacuracyName = tk.Label(self.innacuracy)
-        self.innacuracyName['text'] = 'Погрешность определения вместимости технологического\nнефтепродуктопровода, %'
-        self.innacuracyName.pack(side='left')
-
-        self.innacuracyTxt = tk.Text(self.innacuracy, height=4)
-        self.innacuracyTxt.pack(side='left')
-
-        self.devices = tk.Frame(self.frame3)
-        self.devices.pack()
-
-        self.devicesName = tk.Label(self.devices)
-        self.devicesName['text'] = 'Средства измерений'
-        self.devicesName.pack(side='left')
-
-        self.devicesTxt = tk.Text(self.devices, height=4)
-        self.devicesTxt.pack(side='left')
-
-        self.condOfMeas = tk.LabelFrame(self)
-        self.condOfMeas['text'] = 'Б.1.2 - Условия проведения измерений'
-        self.frame3.pack()
-
-        self.temp = tk.Frame(self.condOfMeas)
-        self.temp.pack()
-
-        self.tempName = tk.Label(self.condOfMeas)
-        self.tempName['text'] = 'Температура воздуха, &#8451 С'
-        self.tempName.pack(side='left')
-
-
-
-
-
-
-
-
-        self.registerNmberInp = tk.Entry(self.registerNumber)
-        self.registerNmberInp.pack()
-
-
-
-        self.quit = tk.Button(self, text="QUIT", fg="red", command=self.master.destroy)
-        self.quit.pack(side="bottom")
-
-    def say_hi(self):
-        print("hi there, everyone!")
 
 root = tk.Tk()
 root.title('Расчет вместимости нефтепродуктопровода')
-root.geometry('600x600')
+root.geometry('1024x768')
 app = Application(master=root)
 
 app.mainloop()
